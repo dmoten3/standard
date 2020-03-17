@@ -1,29 +1,28 @@
 # PHP Coding Standards
 ![](php-logo.png)
 
-Despite still being one of the most used languages to build web applications, PHP doesn't have the best reputation. There are a number of frameworks we use that are built with PHP. In order to avoid PHP's reputation of messy codebases, we should utilize [PHP_CodeSniffer](phpcs) to detect violations of a defined coding standards.
+Despite still being one of the most used languages to build web applications, PHP doesn't have the best reputation. There are a number of frameworks we use that are built with PHP. In order to avoid PHP's reputation of messy codebases, we utilize [PHP_CodeSniffer][phpcs] to detect violations of a defined coding standards.
 
-### What Standard Should I use?
+### Picking a standard
+Many frameworks have their own standards declared. We should use the framework's defined standard when possible. For instance, when developing a WordPress theme, utilize the [WordPress Standard][wp]. If there is not a standard defined, or you are not using a framework, use the [PSR-2 Standard][psr-2].  Some standards are:
 
-Many frameworks have their own standards declared. We should use the framework's defined standard when possible. For instance, when developing a WordPress theme, you should utilize the [WordPress Standard](wp). If there is not a standard defined, or you are not using a framework, you should use the [PSR-2 Standard](psr-2).  Some standards are:
+- [PSR-2 / Default][psr-2]
+- [WordPress][wp]
+- [Symfony][symfony]
+- [Drupal][drupal]
 
-- [PSR-2 / Default]()
-- [WordPress](wp)
-- [Symfony](symfony)
-- [Drupal](drupal)
+### Enforcing a standard
 
-### Enforce my standard with PHPCS
-
-[PHP_CodeSniffer](phpcs) allows us to lint our PHP. To install PHPCS:
+[PHP_CodeSniffer][phpcs] allows us to lint our PHP. To install PHPCS:
 
 1. Install PHP CodeSniffer:
 
     `composer global require "squizlabs/php_codesniffer=*"`
-1. You need access to global composer installs. In your .zshrc file, ensure you have:
+1. To ensure you have access to global composer installs. In your .zshrc or .bashrc file, make sure you have:
 
     `export PATH=~/.composer/vendor/bin:$PATH`
 
-#### Install Coding Standards:
+3. Install Coding Standards:
 
 <details>
   <summary>PSR-2 Coding Standard</summary>
@@ -68,46 +67,39 @@ Many frameworks have their own standards declared. We should use the framework's
   </ol>
 </details>
 
-After adding your standard(s), you should verify them with: `phpcs -i`
+4. To verify the selected standard(s) were installed correctly, list installed standards with: `phpcs -i`
 
-### Set Up Visual Studio Code to recognize linters
+### Setting Up Visual Studio Code to recognize linters
 
 **Extensions Required:**
-- [phpcs](phpcs_vscode): provides integration for PHP CodeSniffer (phpcs) code linting.
+- [phpcs][phpcs_vscode]: provides integration for PHP CodeSniffer (phpcs) code linting.
 
 **Extensions: Bonuses:**
-- [PHP DocBlocker](docblocker): provides auto-complete for PHP docblocks
-- [PHP Intelephense](intelephense): provides support for PHP code completion and intellisense that supports any PHP file extension
-- [PHP Intellisense](intellisense): provides support for PHP code completion and intellisense, but only for files using the PHP extension
-- [Drupal 8 Extensions](drupal8)
-- [Drupal 7 Extensions](drupal7)
+- [PHP DocBlocker][docblocker]: provides auto-complete for PHP docblocks
+- [PHP Intelephense][intelephense]: provides support for PHP code completion and intellisense that supports any PHP file extension
+- [PHP Intellisense][intellisense]: provides support for PHP code completion and intellisense, but only for files using the PHP extension
+- [Drupal 8 Extensions][drupal8]
+- [Drupal 7 Extensions][drupal7]
 
 If you want to see the linter in your editor, you should set up per-project vsCode settings.
 <details>
   <summary>Example Drupal Standards VScode Config</summary>
 
-  ```
+  ```PHP
   {
-    /* Drupal Code Standards Config */
     "phpcs.enable": true,
     "phpcs.standard": "Drupal",
 
     /* Editor Suggestions / Optional */
     "breadcrumbs.enabled": true,
-    "css.validate": true,
-    "diffEditor.ignoreTrimWhitespace": false,
     "editor.tabSize": 2,
     "editor.autoIndent": "full",
-    "editor.insertSpaces": true,
-    "editor.formatOnPaste": true,
     "editor.formatOnSave": false,
     "editor.renderWhitespace": "boundary",
     "editor.wordWrapColumn": 80,
     "editor.wordWrap": "off",
     "editor.detectIndentation": true,
-    "editor.rulers": [
-      80
-    ],
+    "editor.rulers": [ 80 ],
     "files.associations": {
       "*.inc": "php",
       "*.module": "php",
@@ -117,8 +109,6 @@ If you want to see the linter in your editor, you should set up per-project vsCo
       "*.test": "php",
       "*.php": "php"
     },
-    "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true,
     "html.format.enable": true,
     "html.format.wrapLineLength": 80,
     "telemetry.enableTelemetry": false,
@@ -129,8 +119,9 @@ If you want to see the linter in your editor, you should set up per-project vsCo
 <details>
   <summary>Example WordPress Standards VScode Config</summary>
 
-  ```
+  ```PHP
   {
+    "phpcs.enable": true,
     "phpcs.standard": "WordPress",
 
     /* Editor Suggestions / Optional */
@@ -146,10 +137,10 @@ If you want to see the linter in your editor, you should set up per-project vsCo
 CircleCi provides orbs which are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools.
 
 Some example orbs are:
-- [WordPress phpcs orb](drupal_orb)
-- [Drupal phpcs orb](wp_orb)
+- [WordPress phpcs orb][drupal_orb]
+- [Drupal phpcs orb][wp_orb]
 
-You can also set up a custom CircleCi setting by modifying an existing orb, or creating a new config from scratch. [Here](wp_custom), is a custom WordPress config example.
+When a public orb doesn't fit the needs of a project, we can set up a custom CircleCi setting by modifying an existing orb, or creating a new config from scratch. [Here][wp_custom], is a custom WordPress config example.
 
 <!-- Links are defined below to make markdown above more readable -->
 [wp]: https://github.com/squizlabs/PHP_CodeSniffer
